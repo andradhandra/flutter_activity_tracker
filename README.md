@@ -1,4 +1,4 @@
-# Flutter Habit Tracker App
+# Flutter Activity Tracker App
 
 This folder contains the main project of my [Flutter Animations Course](https://nnbd.me/fa).
 
