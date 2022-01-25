@@ -26,7 +26,7 @@ class _TickerAnimationState extends State<AnimatedTask>
     }
   }
 
-  void _onTapUp(TapUpDetails details) {
+  void _onAnimationCancel() {
     if (_animationController.status != AnimationStatus.completed) {
       _animationController.reverse();
     }
@@ -78,7 +78,8 @@ class _TickerAnimationState extends State<AnimatedTask>
   Widget build(BuildContext context) {
     return GestureDetector(
       onTapDown: _onTapDown,
-      onTapUp: _onTapUp,
+      onTapUp: (_) => _onAnimationCancel(),
+      onTapCancel: _onAnimationCancel,
       child: AnimatedBuilder(
         animation: _curveAnimation,
         builder: (context, child) {
