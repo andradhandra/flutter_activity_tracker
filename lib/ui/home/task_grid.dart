@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:habit_tracker_flutter/models/task_preset.dart';
+import 'package:habit_tracker_flutter/models/task_model.dart';
 import 'package:habit_tracker_flutter/ui/task/task_with_name.dart';
 
 class TaskGrid extends StatelessWidget {
@@ -7,7 +7,7 @@ class TaskGrid extends StatelessWidget {
     Key? key,
     this.tasks = const [],
   }) : super(key: key);
-  final List<TaskPreset> tasks;
+  final List<TaskModel> tasks;
 
   @override
   Widget build(BuildContext context) {

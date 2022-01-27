@@ -26,10 +26,15 @@ dependencies:
   cupertino_icons: 1.0.2
   flutter_launcher_icons:
   flutter_svg:
+  hive:  
+  hive_flutter:
+  uuid:
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  hive_generator:
+  build_runner: 
 
 flutter_icons:
   ios: true

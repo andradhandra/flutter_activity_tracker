@@ -69,9 +69,9 @@ class _TickerAnimationState extends State<AnimatedTask>
 
   @override
   void dispose() {
-    super.dispose();
     _animationController.removeStatusListener(_checkStatusUpdate);
     _animationController.dispose();
+    super.dispose();
   }
 
   @override
