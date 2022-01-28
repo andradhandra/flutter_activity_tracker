@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:habit_tracker_flutter/constants/app_assets.dart';
 import 'package:habit_tracker_flutter/constants/app_colors.dart';
 import 'package:habit_tracker_flutter/models/task_model.dart';
@@ -22,7 +23,12 @@ Future<void> main() async {
       TaskModel.create(name: 'Do 10 Pushups', iconName: AppAssets.pushups),
     ],
   );
-  runApp(MyApp());
+  runApp(ProviderScope(
+    overrides: [
+      dataStoreProvider.overrideWithValue(dataStore),
+    ],
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {

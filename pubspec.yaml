@@ -29,6 +29,7 @@ dependencies:
   hive:  
   hive_flutter:
   uuid:
+  flutter_riverpod: ^1.0.3
 
 dev_dependencies:
   flutter_test:
