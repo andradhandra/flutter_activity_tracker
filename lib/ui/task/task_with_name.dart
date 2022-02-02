@@ -5,12 +5,17 @@ import 'package:habit_tracker_flutter/ui/task/animated_task.dart';
 import 'package:habit_tracker_flutter/ui/theming/app_theme.dart';
 
 class TaskWithName extends StatelessWidget {
-  final TaskModel task;
-
   const TaskWithName({
     Key? key,
     required this.task,
+    this.isCompleted = false,
+    this.onCompleted,
   }) : super(key: key);
+
+  final TaskModel task;
+  final bool isCompleted;
+  final ValueChanged<bool>? onCompleted;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -18,7 +23,11 @@ class TaskWithName extends StatelessWidget {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          AnimatedTask(iconName: task.iconName),
+          AnimatedTask(
+            iconName: task.iconName,
+            isCompleted: isCompleted,
+            onCompleted: onCompleted,
+          ),
           SizedBox(height: 12),
           Text(
             task.name.toUpperCase(),

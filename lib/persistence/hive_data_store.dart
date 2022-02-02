@@ -10,12 +10,18 @@ class HiveDataStore {
   static String taskStateKey(String key) => 'taskState/$key';
 
   Future<void> init() async {
-    await Hive.initFlutter();
-    //register adapters
-    Hive.registerAdapter<TaskModel>(TaskModelAdapter());
-    Hive.registerAdapter<TaskState>(TaskStateAdapter());
-    //open boxes
-    await Hive.openBox<TaskModel>(taskBoxName);
+    try {
+      await Hive.initFlutter();
+      //register adapters
+      Hive.registerAdapter<TaskModel>(TaskModelAdapter());
+      Hive.registerAdapter<TaskState>(TaskStateAdapter());
+      //open boxes
+      await Hive.openBox<TaskModel>(taskBoxName);
+      await Hive.openBox<TaskState>(taskStateBoxName);
+    } catch (e) {
+      print('Hive openbox init error');
+      print(e);
+    }
   }
 
   Future<void> createTask({
@@ -47,6 +53,11 @@ class HiveDataStore {
     final box = Hive.box<TaskState>(taskStateBoxName);
     final key = taskStateKey(task.id);
     return box.listenable(keys: <String>[key]);
+  }
+
+  TaskState taskState(Box<TaskState> box, {required TaskModel task}) {
+    final key = taskStateKey(task.id);
+    return box.get(key) ?? TaskState(taskId: task.id, isCompleted: false);
   }
 }
 

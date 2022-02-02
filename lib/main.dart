@@ -8,9 +8,8 @@ import 'package:habit_tracker_flutter/ui/home/home_page.dart';
 import 'package:habit_tracker_flutter/ui/theming/app_theme.dart';
 
 Future<void> main() async {
-  final dataStore = HiveDataStore();
-
   WidgetsFlutterBinding.ensureInitialized();
+  final dataStore = HiveDataStore();
   await AppAssets.preloadSVGs();
   await dataStore.init();
   await dataStore.createTask(

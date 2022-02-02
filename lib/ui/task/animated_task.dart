@@ -5,8 +5,15 @@ import 'package:habit_tracker_flutter/ui/task/task_completion_ring.dart';
 import 'package:habit_tracker_flutter/ui/theming/app_theme.dart';
 
 class AnimatedTask extends StatefulWidget {
-  const AnimatedTask({Key? key, required this.iconName}) : super(key: key);
+  const AnimatedTask({
+    Key? key,
+    required this.iconName,
+    required this.isCompleted,
+    this.onCompleted,
+  }) : super(key: key);
   final String iconName;
+  final bool isCompleted;
+  final ValueChanged<bool>? onCompleted;
 
   @override
   _TickerAnimationState createState() => _TickerAnimationState();
@@ -19,9 +26,11 @@ class _TickerAnimationState extends State<AnimatedTask>
   bool _showCheckIcon = false;
 
   void _onTapDown(TapDownDetails details) {
-    if (_animationController.status != AnimationStatus.completed) {
+    if (!widget.isCompleted &&
+        _animationController.status != AnimationStatus.completed) {
       _animationController.forward();
     } else if (!_showCheckIcon) {
+      widget.onCompleted?.call(false);
       _animationController.value = 0;
     }
   }
@@ -34,6 +43,7 @@ class _TickerAnimationState extends State<AnimatedTask>
 
   void _checkStatusUpdate(AnimationStatus status) {
     if (status == AnimationStatus.completed) {
+      widget.onCompleted?.call(true);
       if (mounted) {
         setState(() {
           _showCheckIcon = true;
@@ -84,7 +94,7 @@ class _TickerAnimationState extends State<AnimatedTask>
         animation: _curveAnimation,
         builder: (context, child) {
           final themeData = AppTheme.of(context);
-          final progress = _curveAnimation.value;
+          final progress = widget.isCompleted ? 1.0 : _curveAnimation.value;
           final taskIsNotComplete = progress < 1.0;
           final iconColor =
               taskIsNotComplete ? themeData.taskIcon : themeData.accentNegative;
