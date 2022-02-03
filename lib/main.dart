@@ -13,7 +13,15 @@ Future<void> main() async {
   await AppAssets.preloadSVGs();
   await dataStore.init();
   await dataStore.createTask(
-    tasks: [
+    frontTasks: [
+      TaskModel.create(name: 'Main bola', iconName: AppAssets.basketball),
+      TaskModel.create(name: 'Eat a Healthy Meal', iconName: AppAssets.carrot),
+      TaskModel.create(name: 'Walk the Dog', iconName: AppAssets.dog),
+      TaskModel.create(name: 'Do Some Coding', iconName: AppAssets.html),
+      TaskModel.create(name: 'Meditate', iconName: AppAssets.meditation),
+      TaskModel.create(name: 'Do 10 Pushups', iconName: AppAssets.pushups),
+    ],
+    backTasks: [
       TaskModel.create(name: 'Main bola', iconName: AppAssets.basketball),
       TaskModel.create(name: 'Eat a Healthy Meal', iconName: AppAssets.carrot),
       TaskModel.create(name: 'Walk the Dog', iconName: AppAssets.dog),
@@ -37,6 +45,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         fontFamily: 'Helvetica Neue',
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+        hoverColor: Colors.transparent,
       ),
       home: AppTheme(
         data: AppThemeData.defaultWithSwatch(AppColors.red),

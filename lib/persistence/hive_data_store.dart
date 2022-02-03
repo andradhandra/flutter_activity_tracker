@@ -5,7 +5,8 @@ import 'package:habit_tracker_flutter/models/task_state.dart';
 import 'package:hive_flutter/adapters.dart';
 
 class HiveDataStore {
-  static const taskBoxName = 'tasks';
+  static const frontTaskBoxName = 'frontTasks';
+  static const backTaskBoxName = 'backTasks';
   static const taskStateBoxName = 'tasksState';
   static String taskStateKey(String key) => 'taskState/$key';
 
@@ -16,7 +17,8 @@ class HiveDataStore {
       Hive.registerAdapter<TaskModel>(TaskModelAdapter());
       Hive.registerAdapter<TaskState>(TaskStateAdapter());
       //open boxes
-      await Hive.openBox<TaskModel>(taskBoxName);
+      await Hive.openBox<TaskModel>(frontTaskBoxName);
+      await Hive.openBox<TaskModel>(backTaskBoxName);
       await Hive.openBox<TaskState>(taskStateBoxName);
     } catch (e) {
       print('Hive openbox init error');
@@ -25,18 +27,32 @@ class HiveDataStore {
   }
 
   Future<void> createTask({
-    required List<TaskModel> tasks,
+    required List<TaskModel> frontTasks,
+    required List<TaskModel> backTasks,
     bool isForced = false,
   }) async {
-    final box = Hive.box<TaskModel>(taskBoxName);
-    if (box.isEmpty || isForced) {
-      await box.clear();
-      await box.addAll(tasks);
+    final frontBox = Hive.box<TaskModel>(frontTaskBoxName);
+    if (frontBox.isEmpty || isForced) {
+      await frontBox.clear();
+      await frontBox.addAll(frontTasks);
+    } else {
+      print('Box already has ${frontBox.length} items');
+    }
+    final backBox = Hive.box<TaskModel>(frontTaskBoxName);
+    if (backBox.isEmpty || isForced) {
+      await backBox.clear();
+      await backBox.addAll(frontTasks);
+    } else {
+      print('Box already has ${backBox.length} items');
     }
   }
 
-  ValueListenable<Box<TaskModel>> taskListenable() {
-    return Hive.box<TaskModel>(taskBoxName).listenable();
+  ValueListenable<Box<TaskModel>> frontTaskListenable() {
+    return Hive.box<TaskModel>(frontTaskBoxName).listenable();
+  }
+
+  ValueListenable<Box<TaskModel>> backTaskListenable() {
+    return Hive.box<TaskModel>(backTaskBoxName).listenable();
   }
 
   Future<void> setTaskState({

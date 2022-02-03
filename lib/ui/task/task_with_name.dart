@@ -29,11 +29,13 @@ class TaskWithName extends StatelessWidget {
             onCompleted: onCompleted,
           ),
           SizedBox(height: 12),
-          Text(
-            task.name.toUpperCase(),
-            textAlign: TextAlign.center,
-            style: TextStyles.taskName.copyWith(
-              color: AppTheme.of(context).accent,
+          Flexible(
+            child: Text(
+              task.name.toUpperCase(),
+              textAlign: TextAlign.center,
+              style: TextStyles.taskName.copyWith(
+                color: AppTheme.of(context).accent,
+              ),
             ),
           )
         ],

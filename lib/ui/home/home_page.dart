@@ -9,18 +9,21 @@ import 'package:hive/hive.dart';
 class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final _pageFlipKey = GlobalKey<PageFlipBuilderState>();
     final dataStore = ref.watch(dataStoreProvider);
     return PageFlipBuilder(
       frontPageBuilder: (_) => ValueListenableBuilder(
-        valueListenable: dataStore.taskListenable(),
+        valueListenable: dataStore.frontTaskListenable(),
         builder: (_, Box<TaskModel> box, __) => TaskGridPage(
           tasks: box.values.toList(),
+          onFlip: () => _pageFlipKey.currentState?.flip(),
         ),
       ),
       backPageBuilder: (_) => ValueListenableBuilder(
-        valueListenable: dataStore.taskListenable(),
+        valueListenable: dataStore.backTaskListenable(),
         builder: (_, Box<TaskModel> box, __) => TaskGridPage(
           tasks: box.values.toList(),
+          onFlip: () => _pageFlipKey.currentState?.flip(),
         ),
       ),
     );
