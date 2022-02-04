@@ -22,12 +22,13 @@ Future<void> main() async {
       TaskModel.create(name: 'Do 10 Pushups', iconName: AppAssets.pushups),
     ],
     backTasks: [
-      TaskModel.create(name: 'Main bola', iconName: AppAssets.basketball),
-      TaskModel.create(name: 'Eat a Healthy Meal', iconName: AppAssets.carrot),
-      TaskModel.create(name: 'Walk the Dog', iconName: AppAssets.dog),
-      TaskModel.create(name: 'Do Some Coding', iconName: AppAssets.html),
-      TaskModel.create(name: 'Meditate', iconName: AppAssets.meditation),
-      TaskModel.create(name: 'Do 10 Pushups', iconName: AppAssets.pushups),
+      TaskModel.create(name: 'Do Karate', iconName: AppAssets.karate),
+      TaskModel.create(name: 'Go Running', iconName: AppAssets.run),
+      TaskModel.create(name: 'Go Swimming', iconName: AppAssets.swimmer),
+      TaskModel.create(
+          name: 'Do Some Stretches', iconName: AppAssets.stretching),
+      TaskModel.create(name: 'Play Sports', iconName: AppAssets.basketball),
+      TaskModel.create(name: 'Spend Time Outside', iconName: AppAssets.sun),
     ],
   );
   runApp(ProviderScope(

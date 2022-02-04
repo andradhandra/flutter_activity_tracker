@@ -36,14 +36,14 @@ class HiveDataStore {
       await frontBox.clear();
       await frontBox.addAll(frontTasks);
     } else {
-      print('Box already has ${frontBox.length} items');
+      print('Front Box already has ${frontBox.length} items');
     }
-    final backBox = Hive.box<TaskModel>(frontTaskBoxName);
+    final backBox = Hive.box<TaskModel>(backTaskBoxName);
     if (backBox.isEmpty || isForced) {
       await backBox.clear();
       await backBox.addAll(frontTasks);
     } else {
-      print('Box already has ${backBox.length} items');
+      print('Back Box already has ${backBox.length} items');
     }
   }
 

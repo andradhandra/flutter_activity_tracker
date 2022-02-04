@@ -8,7 +8,7 @@ class TaskGridPage extends StatelessWidget {
   const TaskGridPage({
     Key? key,
     required this.tasks,
-    required this.onFlip,
+    this.onFlip,
   }) : super(key: key);
   final List<TaskModel> tasks;
   final VoidCallback? onFlip;

@@ -30,6 +30,7 @@ dependencies:
   hive_flutter:
   uuid:
   flutter_riverpod: ^1.0.3
+  page_flip_builder: ^0.1.3
 
 dev_dependencies:
   flutter_test:
